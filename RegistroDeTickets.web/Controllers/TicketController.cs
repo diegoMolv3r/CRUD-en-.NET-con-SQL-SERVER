@@ -42,5 +42,11 @@ namespace RegistroDeTickets.web.Controllers
             List<TicketEntity> tickets = _ticketService.ObtenerTickets();
             return View(tickets);
         }
+
+        public IActionResult Eliminar(int id)
+        {
+            _ticketService.EliminarTicket(id);
+            return RedirectToAction("Listar");
+        }
     }
 }

@@ -227,6 +227,7 @@
                     <th>Tipo</th>
                     <th>Descripción</th>
                     <th>Fecha de Emisión</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody id="ticketsTableBody">
@@ -238,6 +239,7 @@
                         <td>@ticket.Tipo</td>
                         <td>@ticket.Descripcion</td>
                         <td>@ticket.FechaCreacion.ToString("g")</td>
+                        <td><a class="btn btn-danger" asp-controller="Ticket" asp-action="Eliminar" asp-route-id="@ticket.Id">Eliminar</a></td>
                     </tr>
                 }
             </tbody>

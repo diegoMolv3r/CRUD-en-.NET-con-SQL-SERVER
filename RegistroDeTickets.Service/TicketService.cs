@@ -6,6 +6,8 @@ namespace RegistroDeTickets.Service
     {
         void AgregarTicket(TicketEntity ticket);
         List<TicketEntity> ObtenerTickets();
+
+        void EliminarTicket(int id);
     }
 
     public class TicketService : ITicketService
@@ -23,6 +25,15 @@ namespace RegistroDeTickets.Service
         public List<TicketEntity> ObtenerTickets()
         {
             return _tickets;
+        }
+
+        public void EliminarTicket(int id)
+        {
+            var ticket = _tickets.FirstOrDefault(t => t.Id == id);
+            if (ticket != null)
+            {
+                _tickets.Remove(ticket);
+            }
         }
 
     }
