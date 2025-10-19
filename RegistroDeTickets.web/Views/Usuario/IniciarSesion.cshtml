@@ -1,0 +1,60 @@
+﻿@{
+    ViewData["Title"] = "Iniciar Sesion";
+}
+
+
+<style>
+    .registration-form {
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+    }
+</style>
+
+<div class="registration-form">
+    <h2 class="text-center mb-4 fw-bold" style="color: #0d6efd;">Iniciar Sesion</h2>
+    <form>
+        <div class="input-group mb-3">
+            <span class="input-group-text"><i class="bi bi-person"></i></span>
+            <input type="text" class="form-control" id="username" placeholder="Nombre de usuario" required>
+        </div>
+
+        <div class="input-group mb-3">
+            <span class="input-group-text"><i class="bi bi-lock"></i></span>
+            <input type="password" class="form-control" id="password" placeholder="Contraseña" required>
+            <button class="input-group-text" type="button" id="togglePassword">
+                <i class="bi bi-eye"></i>
+            </button>
+        </div>
+
+        <div class="d-grid">
+            <button type="submit" class="btn btn-primary btn-block">Iniciar Sesión</button>
+        </div>
+
+        <div class="text-center mt-3">
+            <p class="text-info">¿No tenés cuenta? <a href="#">Registrarse</a></p>
+        </div>
+    </form>
+</div>
+
+<script>
+    const setupPasswordToggle = (toggleButtonId, passwordInputId) => {
+        const toggleButton = document.getElementById(toggleButtonId);
+        const passwordInput = document.getElementById(passwordInputId);
+        const eyeIcon = toggleButton.querySelector('i');
+
+        toggleButton.addEventListener('click', function () {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+
+            eyeIcon.classList.toggle('bi-eye');
+            eyeIcon.classList.toggle('bi-eye-slash');
+        });
+    };
+
+    setupPasswordToggle('togglePassword', 'password');
+    setupPasswordToggle('toggleConfirmPassword', 'confirmPassword');
+</script>
