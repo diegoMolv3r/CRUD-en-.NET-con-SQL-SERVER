@@ -3,6 +3,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<RegistroDeTickets.Service.ITicketService, RegistroDeTickets.Service.TicketService>();
+builder.Services.AddSingleton<RegistroDeTickets.Service.IUsuarioService, RegistroDeTickets.Service.UsuarioService>();
 
 var app = builder.Build();
 
