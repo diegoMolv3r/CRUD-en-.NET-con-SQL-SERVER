@@ -14,25 +14,30 @@
     }
 </style>
 
+@model RegistroDeTickets.web.Models.UsuarioViewModel
+
 <div class="registration-form">
     <h2 class="text-center mb-4 fw-bold" style="color: #0d6efd;">Registrarse</h2>
-    <form>
+    <form method="post">
         <div class="input-group mb-3">
             <span class="input-group-text"><i class="bi bi-person"></i></span>
-            <input type="text" class="form-control" id="username" placeholder="Nombre de usuario" required>
+            <input asp-for="Username" type="text" class="form-control" id="username" placeholder="Nombre de usuario" required>
+            <span asp-validation-for="Username" class="text-danger"></span>
         </div>
 
         <div class="input-group mb-3">
             <span class="input-group-text"><i class="bi bi-envelope"></i></span>
-            <input type="email" class="form-control" id="email" placeholder="Correo electrónico" required>
+            <input asp-for="Email" type="email" class="form-control" id="email" placeholder="Correo electrónico" required>
+            <span asp-validation-for="Email" class="text-danger"></span>
         </div>
 
         <div class="input-group mb-3">
             <span class="input-group-text"><i class="bi bi-lock"></i></span>
-            <input type="password" class="form-control" id="password" placeholder="Contraseña" required>
+            <input asp-for="Contrasenia" type="password" class="form-control" id="password" placeholder="Contraseña" required>
             <button class="input-group-text" type="button" id="togglePassword">
                 <i class="bi bi-eye"></i>
             </button>
+            <span asp-validation-for="Contrasenia" class="text-danger"></span>
         </div>
 
         <div class="input-group mb-4">
@@ -54,24 +59,20 @@
 </div>
 
 <script>
-    // Función genérica para manejar el toggle de cualquier campo de contraseña
     const setupPasswordToggle = (toggleButtonId, passwordInputId) => {
         const toggleButton = document.getElementById(toggleButtonId);
         const passwordInput = document.getElementById(passwordInputId);
         const eyeIcon = toggleButton.querySelector('i');
 
         toggleButton.addEventListener('click', function () {
-            // Alternar el tipo de input
             const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
             passwordInput.setAttribute('type', type);
 
-            // Alternar el ícono del ojo
             eyeIcon.classList.toggle('bi-eye');
             eyeIcon.classList.toggle('bi-eye-slash');
         });
     };
 
-    // Configurar los toggles para ambos campos de contraseña
     setupPasswordToggle('togglePassword', 'password');
     setupPasswordToggle('toggleConfirmPassword', 'confirmPassword');
 </script>
