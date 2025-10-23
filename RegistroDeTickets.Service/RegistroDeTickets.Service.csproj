@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RegistroDeTickets.Entidades\RegistroDeTickets.Entidades.csproj" />
+    <ProjectReference Include="..\RegistroDeTickets.Entidades\RegistroDeTickets.Data.csproj" />
   </ItemGroup>
 
 </Project>

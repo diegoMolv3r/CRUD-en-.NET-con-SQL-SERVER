@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RegistroDeTickets.Entidades;
 using RegistroDeTickets.Service;
+using RegistroDeTickets.Data.Entidades;
 using RegistroDeTickets.web.Models;
 
 namespace RegistroDeTickets.web.Controllers
@@ -27,11 +27,11 @@ namespace RegistroDeTickets.web.Controllers
             {
                 return View(usuarioVM);
             }
-            _usuarioService.AgregarUsuario(new UsuarioEntity
+            _usuarioService.AgregarUsuario(new Usuario
             {
                 Username = usuarioVM.Username,
                 Email = usuarioVM.Email,
-                Contrasenia = usuarioVM.Contrasenia
+                PasswordHash = usuarioVM.Contrasenia
             });
                 return RedirectToAction("Listar");
         }

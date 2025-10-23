@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RegistroDeTickets.Entidades;
 using RegistroDeTickets.Service;
+using RegistroDeTickets.Data.Entidades;
 using RegistroDeTickets.web.Models;
 
 namespace RegistroDeTickets.web.Controllers
@@ -27,7 +27,7 @@ namespace RegistroDeTickets.web.Controllers
                 return View(ticketVM);
             }
             
-            _ticketService.AgregarTicket(new RegistroDeTickets.Entidades.TicketEntity
+            _ticketService.AgregarTicket(new Ticket
             {
                 Motivo = ticketVM.Motivo,
                 Tipo = ticketVM.Tipo,
@@ -39,8 +39,7 @@ namespace RegistroDeTickets.web.Controllers
         [HttpGet]
         public IActionResult Listar()
         {
-            List<TicketEntity> tickets = _ticketService.ObtenerTickets();
-            return View(tickets);
+            return View(_ticketService.ObtenerTickets());
         }
 
         public IActionResult Eliminar(int id)

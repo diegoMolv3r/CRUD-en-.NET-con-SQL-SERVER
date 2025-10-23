@@ -1,29 +1,29 @@
-﻿using System;
+﻿using RegistroDeTickets.Data.Entidades;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using RegistroDeTickets.Entidades;
 
 namespace RegistroDeTickets.Service
 {   
     public interface IUsuarioService
     {
-        void AgregarUsuario(UsuarioEntity usuario);
-        List<UsuarioEntity> ObtenerUsuarios();
+        void AgregarUsuario(Usuario usuario);
+        List<Usuario> ObtenerUsuarios();
 
         void EliminarUsuario(int id);
     }
     public class UsuarioService : IUsuarioService
     {
-        public static List<UsuarioEntity> _usuarios = new List<UsuarioEntity>();
+        public static List<Usuario> _usuarios = new List<Usuario>();
 
-        public void AgregarUsuario(UsuarioEntity usuario)
+        public void AgregarUsuario(Usuario usuario)
         {
             usuario.Id = _usuarios.Count + 1;
             _usuarios.Add(usuario);
         }
-        public List<UsuarioEntity> ObtenerUsuarios()
+        public List<Usuario> ObtenerUsuarios()
         {
             return _usuarios;
         }
