@@ -1,4 +1,5 @@
 ﻿using RegistroDeTickets.Data.Entidades;
+using RegistroDeTickets.Repository;
 
 namespace RegistroDeTickets.Service
 {
@@ -6,13 +7,13 @@ namespace RegistroDeTickets.Service
     {
         void AgregarTicket(Ticket ticket);
         List<Ticket> ObtenerTickets();
-
-        void EliminarTicket(int id);
+        void EditarTicket(Ticket ticket);
+        void EliminarTicket(Ticket ticket);
     }
 
     public class TicketService : ITicketService
     {
-
+        ITicketRepository _ticketRepository;
         public void AgregarTicket(Ticket ticket)
         {
             RegistroDeTicketsPw3Context ctx = new RegistroDeTicketsPw3Context();
@@ -34,13 +35,17 @@ namespace RegistroDeTickets.Service
             return ctx.Tickets.ToList();
         }
 
-        public void EliminarTicket(int id)
+        public void EditarTicket(Ticket ticket)
         {
-            // var ticket = _tickets.FirstOrDefault(t => t.Id == id);
-            // if (ticket != null)
-            // {
-            // _tickets.Remove(ticket);
-            // }
+
+        }
+
+        public void EliminarTicket(Ticket ticket)
+        {
+            RegistroDeTicketsPw3Context ctx = new RegistroDeTicketsPw3Context();
+
+            ctx.Tickets.Remove(ctx.Tickets.Find(ticket.Id));
+            ctx.SaveChanges();
         }
 
     }

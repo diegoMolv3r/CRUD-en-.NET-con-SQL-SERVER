@@ -47,6 +47,9 @@
 <div class="ticket-form">
     <h2>Registrar Ticket</h2>
     <form method="post">
+        <!-- Enviar token de autenticacion en peticion POST -->
+        @Html.AntiForgeryToken()
+
         <div class="mb-3">
             <label for="motivo" class="form-label">Motivo</label>
             <div class="input-group">

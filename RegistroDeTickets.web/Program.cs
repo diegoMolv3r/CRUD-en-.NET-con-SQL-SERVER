@@ -19,10 +19,9 @@ builder.Services.AddControllersWithViews();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+// Este bloque de codigo es donde se desactiva el Debug en produccion punto 6.1 del TP
 if (!app.Environment.IsDevelopment())
 {
-    //app.UseExceptionHandler("/Error/500");
-
     app.UseStatusCodePagesWithReExecute("/Error/{0}");
 
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
