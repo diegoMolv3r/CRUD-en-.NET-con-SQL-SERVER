@@ -33,7 +33,8 @@ else
     app.UseDeveloperExceptionPage();
 }
 
-app.UseHttpsRedirection();
+app.UseHttpsRedirection(); // Implementar Https Redirection punto 6.3 del TP
+app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
