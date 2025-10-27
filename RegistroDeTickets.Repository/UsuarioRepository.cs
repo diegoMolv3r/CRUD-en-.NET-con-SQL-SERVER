@@ -16,14 +16,9 @@ namespace RegistroDeTickets.Repository
         // DELETE
         void EliminarUsuario(Usuario usuario);
     }
-    public class UsuarioRepository : IUsuarioRepository
+    public class UsuarioRepository(RegistroDeTicketsPw3Context ctx) : IUsuarioRepository
     {
-        private readonly RegistroDeTicketsPw3Context _ctx;
-
-        public UsuarioRepository(RegistroDeTicketsPw3Context ctx)
-        {
-            _ctx = ctx;
-        }
+        private readonly RegistroDeTicketsPw3Context _ctx = ctx;
 
         public void AgregarUsuario(Usuario usuario)
         {
