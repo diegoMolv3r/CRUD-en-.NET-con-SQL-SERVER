@@ -82,20 +82,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        @foreach (var ticket in Model)
+                     @foreach (var ticket in Model)
                         {
+                        <tr>
                             <td>@ticket.Id</td>
                             <td>@ticket.Motivo</td>
                             <td>@ticket.Tipo</td>
                             <td>@ticket.Descripcion</td>
                             <td>@ticket.FechaCreacion.ToString()</td>
                             <td class="text-center action-buttons">
-                                <a class="btn btn-primary btn-sm" asp-controller="Ticket" asp-action="Editar" asp-route-id="@ticket.Id"><i class="bi bi-pencil-fill"></i></a>
-                                <a class="btn btn-danger btn-sm" asp-controller="Ticket" asp-action="Eliminar" asp-route-id="@ticket.Id"><i class="bi bi-trash-fill"></i></a>
+                                <a class="btn btn-primary btn-sm" asp-controller="Ticket" asp-action="Editar" asp-route-id="@ticket"><i class="bi bi-pencil-fill"></i></a>
+                                <a class="btn btn-danger btn-sm" asp-controller="Ticket" asp-action="Eliminar" asp-route-id="@ticket"><i class="bi bi-trash-fill"></i></a>
                             </td>
-                        }
-                    </tr>
+                        </tr>
+                     }
                 </tbody>
             </table>
         </div>

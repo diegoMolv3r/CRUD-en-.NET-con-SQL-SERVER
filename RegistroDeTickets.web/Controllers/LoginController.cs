@@ -26,11 +26,7 @@ namespace RegistroDeTickets.web.Controllers
             {
                 return View(usuario);
             }
-            Usuario encontrado = _usuarioService.BuscarUsuario(usuario);
-            if (encontrado == null)
-            {
-                return View(usuario);
-            }
+           
             return RedirectToAction("Inicio");
         }
     }

@@ -5,13 +5,9 @@ using RegistroDeTickets.web.Models;
 
 namespace RegistroDeTickets.web.Controllers
 {
-    public class TicketController : Controller
+    public class TicketController(ITicketService ticketService) : Controller
     {
-        ITicketService _ticketService;
-        public TicketController(ITicketService ticketService)
-        {
-            _ticketService = ticketService;
-        }
+        private ITicketService _ticketService = ticketService;
 
         [HttpGet]
         public IActionResult Registrar()
@@ -20,6 +16,7 @@ namespace RegistroDeTickets.web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken] // Verificar si el token de autenticacion es válido, solo peticiones POST
         public IActionResult Registrar(TicketViewModel ticketVM)
         {
             if (!ModelState.IsValid)
@@ -42,9 +39,9 @@ namespace RegistroDeTickets.web.Controllers
             return View(_ticketService.ObtenerTickets());
         }
 
-        public IActionResult Eliminar(int id)
+        public IActionResult Eliminar(Ticket ticket)
         {
-            _ticketService.EliminarTicket(id);
+            _ticketService.EliminarTicket(ticket);
             return RedirectToAction("Listar");
         }
     }
