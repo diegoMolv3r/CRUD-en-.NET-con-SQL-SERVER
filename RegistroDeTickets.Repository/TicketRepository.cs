@@ -1,25 +1,29 @@
 ﻿using RegistroDeTickets.Data.Entidades;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RegistroDeTickets.Repository
 {
-    public interface ITicketRepository
+    public interface ITicketRepository // esta interfaz se podria hacer generica para no hacer una por cada entidad?
     {
         void AgregarTicket(Ticket ticket);
         List<Ticket> ObtenerTickets();
         void EditarTicket(Ticket ticket);
         void EliminarTicket(Ticket ticket);
+        Ticket BuscarTicketPorId(int id);
     }
 
-    internal class TicketRepository : ITicketRepository
+    public class TicketRepository : ITicketRepository
     {
+        private static readonly RegistroDeTicketsPw3Context ctx = new();
+
         public void AgregarTicket(Ticket ticket)
         {
-            throw new NotImplementedException();
+            ctx.Tickets.Add(ticket);
+            ctx.SaveChanges();
+        }
+
+        public Ticket BuscarTicketPorId(int id) // borrable este metodo
+        {
+            return ctx.Tickets.Find(id);
         }
 
         public void EditarTicket(Ticket ticket)
@@ -29,12 +33,13 @@ namespace RegistroDeTickets.Repository
 
         public void EliminarTicket(Ticket ticket)
         {
-            throw new NotImplementedException();
+            ctx.Tickets.Remove(BuscarTicketPorId(ticket.Id));
+            ctx.SaveChanges();
         }
 
         public List<Ticket> ObtenerTickets()
         {
-            throw new NotImplementedException();
+            return ctx.Tickets.ToList();
         }
     }
 }

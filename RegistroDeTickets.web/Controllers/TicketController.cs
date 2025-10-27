@@ -7,7 +7,7 @@ namespace RegistroDeTickets.web.Controllers
 {
     public class TicketController(ITicketService ticketService) : Controller
     {
-        private readonly ITicketService _ticketService = ticketService;
+        private ITicketService _ticketService = ticketService;
 
         [HttpGet]
         public IActionResult Registrar()
@@ -39,9 +39,9 @@ namespace RegistroDeTickets.web.Controllers
             return View(_ticketService.ObtenerTickets());
         }
 
-        public IActionResult Eliminar(int id)
+        public IActionResult Eliminar(Ticket ticket)
         {
-            _ticketService.EliminarTicket(id);
+            _ticketService.EliminarTicket(ticket);
             return RedirectToAction("Listar");
         }
     }

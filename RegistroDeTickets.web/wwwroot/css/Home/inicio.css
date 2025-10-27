@@ -1,0 +1,25 @@
+.hero-section-home {
+    background-color: var(--bg-secondary);
+    padding: 4rem 2rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+}
+
+.hero-title {
+    color: var(--primary-blue);
+    font-weight: 700;
+}
+
+.btn-custom-primary {
+    background-color: var(--primary-blue);
+    border-color: var(--primary-blue);
+    color: var(--text-light);
+    padding: 12px 24px;
+    font-weight: 500;
+}
+
+.btn-custom-primary:hover {
+    background-color: #3a6d96;
+    border-color: #3a6d96;
+    color: var(--text-light);
+}

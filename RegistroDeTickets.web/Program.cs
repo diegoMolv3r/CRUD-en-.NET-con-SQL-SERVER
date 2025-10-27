@@ -13,6 +13,7 @@ builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<ITicketService, TicketService>();
 
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<ITicketRepository, TicketRepository>();
 
 builder.Services.AddControllersWithViews();
 
@@ -33,7 +34,8 @@ else
     app.UseDeveloperExceptionPage();
 }
 
-app.UseHttpsRedirection();
+app.UseHttpsRedirection(); // Implementar Https Redirection punto 6.3 del TP
+app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
