@@ -1,88 +1,54 @@
 ﻿@{
-    ViewData["Title"] = "Registrar";
+    ViewData["Title"] = "Registrar Ticket";
+    ViewData["CSS"] = "Cliente/registrarTicket.css";
 }
 
 @model RegistroDeTickets.web.Models.TicketViewModel
 
-<style>
-    .ticket-form {
-        background-color: #ffffff;
-        padding: 30px;
-        border-radius: 12px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        width: 100%;
-        max-width: 450px;
-    }
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="ticket-form-container">
+            <h2>Registrar Ticket</h2>
+            <form method="post">
+                @Html.AntiForgeryToken()
 
-    .ticket-form h2 {
-        text-align: center;
-        margin-bottom: 25px;
-        font-weight: bold;
-        color: #0d6efd;
-    }
-    
-    .ticket-form label {
-        margin-bottom: .5rem;
-        display: inline-block;
-    }
+                <div class="mb-3">
+                    <label for="motivo" class="form-label">Motivo</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-pencil-square"></i></span>
+                        <input id="motivo" name="motivo" class="form-control" placeholder="Ej: Falla de conexión" />
+                    </div>
+                    <span asp-validation-for="Motivo" class="text-danger"></span>
+                </div>
 
-    .form-control {
-        margin-bottom: 0;
-    }
+                <!-- Ojo aca con los names y el nombre del atribut en la tabla -->
+                <div class="mb-3">
+                    <label for="prioridad" class="form-label">Tipo</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-list-task"></i></span>
+                        <select id="prioridad" name="Tipo" class="form-select">
+                            <option value="" selected>Seleccione una prioridad</option>
+                            <option value="Baja">Baja</option>
+                            <option value="Media">Media</option>
+                            <option value="Alta">Alta</option>
+                        </select>
+                    </div>
+                    <span asp-validation-for="Tipo" class="text-danger"></span>
+                </div>
 
-    textarea.form-control {
-        resize: none;
-        min-height: 100px;
-    }
+                <div class="mb-3">
+                    <label for="descripcion" class="form-label">Descripción</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-body-text"></i></span>
+                        <textarea id="descripcion" name="descripcion" class="form-control" placeholder="Detalle aquí el problema..."></textarea>
+                    </div>
+                    <span asp-validation-for="Descripcion" class="text-danger"></span>
+                </div>
 
-    .d-grid {
-        margin-top: 10px;
-    }
-
-    .btn-primary {
-        font-weight: 600;
-    }
-</style>
-
-<div class="ticket-form">
-    <h2>Registrar Ticket</h2>
-    <form method="post">
-        <!-- Enviar token de autenticacion en peticion POST -->
-        @Html.AntiForgeryToken()
-
-        <div class="mb-3">
-            <label for="motivo" class="form-label">Motivo</label>
-            <div class="input-group">
-                <span class="input-group-text"><i class="bi bi-pencil-square"></i></span>
-                <input id="motivo" name="motivo" class="form-control" placeholder="Ej: Falla de conexión" />
-            </div>
-            <span class="text-danger"></span>
+                <div class="d-grid mt-4">
+                    <button type="submit" class="btn btn-custom-primary">Registrar Ticket</button>
+                </div>
+            </form>
         </div>
-
-        <div class="mb-3">
-            <label for="tipo" class="form-label">Tipo</label>
-            <div class="input-group">
-                <span class="input-group-text"><i class="bi bi-list-task"></i></span>
-                <select id="tipo" name="tipo" class="form-select">
-                    <option value="" selected>Seleccione una prioridad</option>
-                    <option value="Baja">Baja</option>
-                    <option value="Media">Media</option>
-                    <option value="Alta">Alta</option>
-                </select>
-            </div>
-            <span class="text-danger"></span>
-        </div>
-
-        <div class="mb-3">
-            <label for="descripcion" class="form-label">Descripción</label>
-            <div class="input-group">
-                <textarea id="descripcion" name="descripcion" class="form-control" placeholder="Detalle aquí el problema..."></textarea>
-            </div>
-            <span class="text-danger"></span>
-        </div>
-
-        <div class="d-grid">
-            <button type="submit" class="btn btn-primary">Registrar Ticket</button>
-        </div>
-    </form>
+    </div>
 </div>

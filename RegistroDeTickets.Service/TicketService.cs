@@ -11,9 +11,10 @@ namespace RegistroDeTickets.Service
         void EliminarTicket(Ticket ticket);
     }
 
-    public class TicketService : ITicketService
+    public class TicketService(ITicketRepository ticketRepository) : ITicketService
     {
-        private readonly ITicketRepository _ticketRepository;
+        private readonly ITicketRepository _ticketRepository = ticketRepository;
+
         public void AgregarTicket(Ticket ticket)
         {
             //ticket.Id = _tickets.Count + 1;  --> Entiendo que con el IDENTITY ya no es necesario calcular el ID manualmente

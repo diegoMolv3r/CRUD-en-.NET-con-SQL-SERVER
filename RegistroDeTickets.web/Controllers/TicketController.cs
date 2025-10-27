@@ -7,7 +7,7 @@ namespace RegistroDeTickets.web.Controllers
 {
     public class TicketController(ITicketService ticketService) : Controller
     {
-        ITicketService _ticketService = ticketService;
+        private ITicketService _ticketService = ticketService;
 
         [HttpGet]
         public IActionResult Registrar()
