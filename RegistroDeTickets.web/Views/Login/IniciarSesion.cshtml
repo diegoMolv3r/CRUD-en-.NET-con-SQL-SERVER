@@ -1,11 +1,12 @@
-﻿@{
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
     Layout = "/Views/Shared/_LoginLayout.cshtml";
 }
-
 @{
-    ViewData["Title"] = "Registrarse";
+    ViewData["Title"] = "Iniciar Sesion";
 }
-
 
 <style>
     .registration-form {
@@ -18,47 +19,34 @@
     }
 </style>
 
-@model RegistroDeTickets.web.Models.UsuarioViewModel
-
 <div class="registration-form">
-    <h2 class="text-center mb-4 fw-bold" style="color: #0d6efd;">Registrarse</h2>
-    <form method="post">
+    <h2 class="text-center mb-4 fw-bold" style="color: #0d6efd;">Iniciar Sesion</h2>
+    <form>
         <div class="input-group mb-3">
             <span class="input-group-text"><i class="bi bi-person"></i></span>
-            <input asp-for="Username" type="text" class="form-control" id="username" placeholder="Nombre de usuario" required>
-            <span asp-validation-for="Username" class="text-danger"></span>
-        </div>
-
-        <div class="input-group mb-3">
-            <span class="input-group-text"><i class="bi bi-envelope"></i></span>
-            <input asp-for="Email" type="email" class="form-control" id="email" placeholder="Correo electrónico" required>
-            <span asp-validation-for="Email" class="text-danger"></span>
+            <input type="text" class="form-control" id="username" placeholder="Nombre de usuario" required>
         </div>
 
         <div class="input-group mb-3">
             <span class="input-group-text"><i class="bi bi-lock"></i></span>
-            <input asp-for="Contrasenia" type="password" class="form-control" id="password" placeholder="Contraseña" required>
+            <input type="password" class="form-control" id="password" placeholder="Contraseña" required>
             <button class="input-group-text" type="button" id="togglePassword">
-                <i class="bi bi-eye"></i>
-            </button>
-            <span asp-validation-for="Contrasenia" class="text-danger"></span>
-        </div>
-
-        <div class="input-group mb-4">
-            <span class="input-group-text"><i class="bi bi-lock"></i></span>
-            <input type="password" class="form-control" id="confirmPassword" placeholder="Confirmar contraseña" required>
-            <button class="input-group-text" type="button" id="toggleConfirmPassword">
                 <i class="bi bi-eye"></i>
             </button>
         </div>
 
         <div class="d-grid">
-            <button type="submit" class="btn btn-primary btn-block">Crear Cuenta</button>
+            <button type="submit" class="btn btn-primary btn-block mb-3">Ingresar</button>
+        </div>
+
+        <div class="d-grid">
+            <a class="btn btn-outline-primary" asp-area="" asp-controller="Usuario" asp-action="Registrar">Registrarme</a>
         </div>
 
         <div class="text-center mt-3">
-            <p class="text-info">¿Ya tienes una cuenta? <a asp-area="" asp-controller="Login" asp-action="IniciarSesion">Login</a></p>
+            <a class="text-info" asp-area="" asp-controller="Login" asp-action="RecuperarContrasenia">¿Olvidaste tu contraseña?</a>
         </div>
+       
     </form>
 </div>
 

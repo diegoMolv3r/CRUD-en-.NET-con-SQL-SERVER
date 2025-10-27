@@ -9,12 +9,8 @@ namespace RegistroDeTickets.Service
         void AgregarUsuario(Usuario usuario);
         // READ
         List<Usuario> ObtenerUsuarios();
-        
-        // UPDATE
-        void EditarUsuario(Usuario usuario);
-        
-        // DELETE
-        void EliminarUsuario(Usuario usuario);
+
+        void EliminarUsuario(int id);
     }
     public class UsuarioService : IUsuarioService
     {
@@ -42,6 +38,12 @@ namespace RegistroDeTickets.Service
         public void EliminarUsuario(Usuario usuario)
         {
             _usuarioRepository.EliminarUsuario(usuario);
+        }
+
+        public Usuario BuscarUsuario(Usuario usuario)
+        {
+            var usuarioEmail = _usuarios.FirstOrDefault(u => u.Email == usuario.Email);
+            return usuarioEmail;
         }
     }
 }
