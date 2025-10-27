@@ -12,6 +12,11 @@ namespace RegistroDeTickets.web.Controllers
             return View();
         }
 
+        public IActionResult Listar()
+        {
+            return View(_ticketService.ObtenerTickets());
+        }
+
         public IActionResult EliminarTicket(Ticket ticket)
         {
             _ticketService.EliminarTicket(ticket);

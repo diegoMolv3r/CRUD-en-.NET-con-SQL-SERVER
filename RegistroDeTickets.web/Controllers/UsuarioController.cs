@@ -35,5 +35,10 @@ namespace RegistroDeTickets.web.Controllers
         {
             return View();
         }
+
+        public IActionResult Logout() 
+        {
+            return RedirectToAction("Registrar");
+        }
     }
 }
