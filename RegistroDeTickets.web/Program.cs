@@ -14,7 +14,6 @@ builder.Services.AddScoped<ITicketService, TicketService>();
 
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 
-
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
