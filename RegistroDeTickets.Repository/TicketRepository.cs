@@ -21,7 +21,7 @@ namespace RegistroDeTickets.Repository
             ctx.SaveChanges();
         }
 
-        public Ticket BuscarTicketPorId(int id) // borrable este metodo
+        public Ticket BuscarTicketPorId(int id) 
         {
             return ctx.Tickets.Find(id);
         }

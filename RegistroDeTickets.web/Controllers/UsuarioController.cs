@@ -36,9 +36,9 @@ namespace RegistroDeTickets.web.Controllers
             return View();
         }
 
-        public IActionResult Listar()
+        public IActionResult Logout() 
         {
-            return View();
+            return RedirectToAction("Registrar");
         }
     }
 }

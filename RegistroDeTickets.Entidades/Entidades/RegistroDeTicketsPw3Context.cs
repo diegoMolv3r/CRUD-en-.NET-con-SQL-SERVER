@@ -127,11 +127,11 @@ public partial class RegistroDeTicketsPw3Context : DbContext
 
             entity.ToTable("Usuario");
 
-            entity.HasIndex(e => e.Id, "UQ__Usuario__3214EC0608723551").IsUnique();
+            entity.HasIndex(e => e.Id, "UQ__Usuario__3214EC063601E820").IsUnique();
 
-            entity.HasIndex(e => e.Username, "UQ__Usuario__536C85E4F6FCD591").IsUnique();
+            entity.HasIndex(e => e.Username, "UQ__Usuario__536C85E42CADA95A").IsUnique();
 
-            entity.HasIndex(e => e.Email, "UQ__Usuario__A9D105342A3C6061").IsUnique();
+            entity.HasIndex(e => e.Email, "UQ__Usuario__A9D1053402040FE3").IsUnique();
 
             entity.Property(e => e.Email).HasMaxLength(255);
             entity.Property(e => e.Username).HasMaxLength(20);
