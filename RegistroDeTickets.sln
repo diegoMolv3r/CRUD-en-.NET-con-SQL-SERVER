@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegistroDeTickets.Data", "R
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegistroDeTickets.Service", "RegistroDeTickets.Service\RegistroDeTickets.Service.csproj", "{2E1789D9-510E-4136-887F-08798AEE39A5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegistroDeTickets.Repository", "RegistroDeTickets.Repository\RegistroDeTickets.Repository.csproj", "{2CD37FEC-3826-46BB-A59E-23A581C449BA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +32,10 @@ Global
 		{2E1789D9-510E-4136-887F-08798AEE39A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E1789D9-510E-4136-887F-08798AEE39A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E1789D9-510E-4136-887F-08798AEE39A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CD37FEC-3826-46BB-A59E-23A581C449BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CD37FEC-3826-46BB-A59E-23A581C449BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CD37FEC-3826-46BB-A59E-23A581C449BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CD37FEC-3826-46BB-A59E-23A581C449BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,16 +1,19 @@
+using RegistroDeTickets.Data.Entidades; 
+using RegistroDeTickets.Service;
 using Microsoft.EntityFrameworkCore;
-using RegistroDeTickets.Data.Entidades;
+using RegistroDeTickets.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-builder.Services.AddControllersWithViews();
-builder.Services.AddSingleton<RegistroDeTickets.Service.ITicketService, RegistroDeTickets.Service.TicketService>();
-builder.Services.AddSingleton<RegistroDeTickets.Service.IUsuarioService, RegistroDeTickets.Service.UsuarioService>();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<RegistroDeTicketsPw3Context>(options =>
     options.UseSqlServer(connectionString));
+
+builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+builder.Services.AddScoped<ITicketService, TicketService>();
+
+builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+
 
 builder.Services.AddControllersWithViews();
 
@@ -36,5 +39,6 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Inicio}/{id?}")
     .WithStaticAssets();
 
+app.MapControllers();
 
 app.Run();

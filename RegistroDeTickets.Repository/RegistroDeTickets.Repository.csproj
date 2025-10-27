@@ -8,8 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RegistroDeTickets.Entidades\RegistroDeTickets.Data.csproj" />
-    <ProjectReference Include="..\RegistroDeTickets.Repository\RegistroDeTickets.Repository.csproj" />
-	
   </ItemGroup>
 
 </Project>
