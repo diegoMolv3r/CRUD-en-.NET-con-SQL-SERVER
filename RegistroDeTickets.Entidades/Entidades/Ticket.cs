@@ -7,19 +7,27 @@ public partial class Ticket
 {
     public int Id { get; set; }
 
-    public string? Motivo { get; set; }
+    public string Motivo { get; set; } = null!;
 
-    public string? Tipo { get; set; }
-
-    public string? Descripcion { get; set; }
-
-    public string? Estado { get; set; }
+    public string Descripcion { get; set; } = null!;
 
     public DateTime? FechaCreacion { get; set; }
 
     public DateTime? FechaActualizacion { get; set; }
 
-    public int IdUsuario { get; set; }
+    public int IdCliente { get; set; }
 
-    public virtual Usuario IdUsuarioNavigation { get; set; } = null!;
+    public int? IdTecnico { get; set; }
+
+    public int EstadoId { get; set; }
+
+    public int PrioridadId { get; set; }
+
+    public virtual TicketEstado Estado { get; set; } = null!;
+
+    public virtual Cliente IdClienteNavigation { get; set; } = null!;
+
+    public virtual Tecnico? IdTecnicoNavigation { get; set; }
+
+    public virtual TicketPrioridad Prioridad { get; set; } = null!;
 }

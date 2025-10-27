@@ -23,17 +23,17 @@
 
                 <!-- Ojo aca con los names y el nombre del atribut en la tabla -->
                 <div class="mb-3">
-                    <label for="prioridad" class="form-label">Tipo</label>
+                    <label for="Prioridad" class="form-label">Tipo</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="bi bi-list-task"></i></span>
-                        <select id="prioridad" name="Tipo" class="form-select">
-                            <option value="" selected>Seleccione una prioridad</option>
-                            <option value="Baja">Baja</option>
-                            <option value="Media">Media</option>
-                            <option value="Alta">Alta</option>
+                        <select id="prioridad" name="Prioridad" class="form-select" required>
+                            <option value="" selected disabled>Seleccione una prioridad</option>
+                            <option value="1">Baja</option>
+                            <option value="2">Media</option>
+                            <option value="3">Alta</option>
                         </select>
                     </div>
-                    <span asp-validation-for="Tipo" class="text-danger"></span>
+                    <span asp-validation-for="Prioridad" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">

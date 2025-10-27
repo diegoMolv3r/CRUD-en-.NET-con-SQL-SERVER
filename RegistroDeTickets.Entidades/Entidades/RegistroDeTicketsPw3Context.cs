@@ -15,53 +15,126 @@ public partial class RegistroDeTicketsPw3Context : DbContext
     {
     }
 
+    public virtual DbSet<Administrador> Administradors { get; set; }
+
+    public virtual DbSet<Cliente> Clientes { get; set; }
+
+    public virtual DbSet<Tecnico> Tecnicos { get; set; }
+
     public virtual DbSet<Ticket> Tickets { get; set; }
+
+    public virtual DbSet<TicketEstado> TicketEstados { get; set; }
+
+    public virtual DbSet<TicketPrioridad> TicketPrioridads { get; set; }
 
     public virtual DbSet<Usuario> Usuarios { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=DESKTOP-7IS0SRC\\SQLEXPRESS;Database=RegistroDeTicketsPW3;\nTrusted_Connection=True;\nTrustServerCertificate=True\n");
+        => optionsBuilder.UseSqlServer("Server=DESKTOP-7IS0SRC\\SQLEXPRESS;Database=RegistroDeTicketsPW3;Trusted_Connection=True;TrustServerCertificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Administrador>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK_Admin");
+
+            entity.ToTable("Administrador");
+
+            entity.Property(e => e.Id).ValueGeneratedNever();
+
+            entity.HasOne(d => d.IdNavigation).WithOne(p => p.Administrador)
+                .HasForeignKey<Administrador>(d => d.Id)
+                .HasConstraintName("FK_Admin_Usuario");
+        });
+
+        modelBuilder.Entity<Cliente>(entity =>
+        {
+            entity.ToTable("Cliente");
+
+            entity.Property(e => e.Id).ValueGeneratedNever();
+
+            entity.HasOne(d => d.IdNavigation).WithOne(p => p.Cliente)
+                .HasForeignKey<Cliente>(d => d.Id)
+                .HasConstraintName("FK_Cliente_Usuario");
+        });
+
+        modelBuilder.Entity<Tecnico>(entity =>
+        {
+            entity.ToTable("Tecnico");
+
+            entity.Property(e => e.Id).ValueGeneratedNever();
+
+            entity.HasOne(d => d.IdNavigation).WithOne(p => p.Tecnico)
+                .HasForeignKey<Tecnico>(d => d.Id)
+                .HasConstraintName("FK_Tecnico_Usuario");
+        });
+
         modelBuilder.Entity<Ticket>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("pk_ticket");
-
             entity.ToTable("Ticket");
 
-            entity.Property(e => e.Descripcion).HasColumnType("text");
-            entity.Property(e => e.Estado)
-                .HasMaxLength(30)
-                .IsUnicode(false);
-            entity.Property(e => e.FechaCreacion).HasDefaultValueSql("(getdate())");
-            entity.Property(e => e.IdUsuario).HasColumnName("Id_usuario");
-            entity.Property(e => e.Motivo)
-                .HasMaxLength(30)
-                .IsUnicode(false);
-            entity.Property(e => e.Tipo)
-                .HasMaxLength(30)
-                .IsUnicode(false);
+            entity.Property(e => e.EstadoId).HasDefaultValue(1);
+            entity.Property(e => e.FechaActualizacion).HasColumnType("datetime");
+            entity.Property(e => e.FechaCreacion)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.IdCliente).HasColumnName("Id_cliente");
+            entity.Property(e => e.IdTecnico).HasColumnName("Id_tecnico");
+            entity.Property(e => e.Motivo).HasMaxLength(50);
 
-            entity.HasOne(d => d.IdUsuarioNavigation).WithMany(p => p.Tickets)
-                .HasForeignKey(d => d.IdUsuario)
+            entity.HasOne(d => d.Estado).WithMany(p => p.Tickets)
+                .HasForeignKey(d => d.EstadoId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fk_ticket_usuario");
+                .HasConstraintName("FK_Ticket_Estado");
+
+            entity.HasOne(d => d.IdClienteNavigation).WithMany(p => p.Tickets)
+                .HasForeignKey(d => d.IdCliente)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Ticket_Cliente");
+
+            entity.HasOne(d => d.IdTecnicoNavigation).WithMany(p => p.Tickets)
+                .HasForeignKey(d => d.IdTecnico)
+                .HasConstraintName("FK_Ticket_Tecnico");
+
+            entity.HasOne(d => d.Prioridad).WithMany(p => p.Tickets)
+                .HasForeignKey(d => d.PrioridadId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Ticket_Prioridad");
+        });
+
+        modelBuilder.Entity<TicketEstado>(entity =>
+        {
+            entity.ToTable("TicketEstado");
+
+            entity.HasIndex(e => e.Nombre, "UQ_TicketEstado_Nombre").IsUnique();
+
+            entity.Property(e => e.Nombre).HasMaxLength(30);
+        });
+
+        modelBuilder.Entity<TicketPrioridad>(entity =>
+        {
+            entity.ToTable("TicketPrioridad");
+
+            entity.HasIndex(e => e.Nombre, "UQ_TicketPrioridad_Nombre").IsUnique();
+
+            entity.Property(e => e.Nombre).HasMaxLength(30);
         });
 
         modelBuilder.Entity<Usuario>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("pk_usuario");
+            entity.HasKey(e => e.Id).HasName("PK_usuario");
 
             entity.ToTable("Usuario");
 
-            entity.Property(e => e.Email)
-                .HasMaxLength(255)
-                .IsUnicode(false);
-            entity.Property(e => e.Username)
-                .HasMaxLength(20)
-                .IsUnicode(false);
+            entity.HasIndex(e => e.Id, "UQ__Usuario__3214EC0608723551").IsUnique();
+
+            entity.HasIndex(e => e.Username, "UQ__Usuario__536C85E4F6FCD591").IsUnique();
+
+            entity.HasIndex(e => e.Email, "UQ__Usuario__A9D105342A3C6061").IsUnique();
+
+            entity.Property(e => e.Email).HasMaxLength(255);
+            entity.Property(e => e.Username).HasMaxLength(20);
         });
 
         OnModelCreatingPartial(modelBuilder);
