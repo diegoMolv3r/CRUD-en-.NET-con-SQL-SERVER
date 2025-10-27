@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using RegistroDeTickets.Service;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using RegistroDeTickets.Data.Entidades;
+using RegistroDeTickets.Service;
 using RegistroDeTickets.web.Models;
 
 namespace RegistroDeTickets.web.Controllers
 {
-    public class TicketController(ITicketService ticketService) : Controller
+    public class ClienteController(ITicketService ticketService) : Controller
     {
         private readonly ITicketService _ticketService = ticketService;
 
@@ -23,7 +24,7 @@ namespace RegistroDeTickets.web.Controllers
             {
                 return View(ticketVM);
             }
-            
+
             _ticketService.AgregarTicket(new Ticket
             {
                 Motivo = ticketVM.Motivo,
@@ -37,12 +38,6 @@ namespace RegistroDeTickets.web.Controllers
         public IActionResult Listar()
         {
             return View(_ticketService.ObtenerTickets());
-        }
-
-        public IActionResult Eliminar(Ticket ticket)
-        {
-            _ticketService.EliminarTicket(ticket);
-            return RedirectToAction("Listar");
         }
     }
 }

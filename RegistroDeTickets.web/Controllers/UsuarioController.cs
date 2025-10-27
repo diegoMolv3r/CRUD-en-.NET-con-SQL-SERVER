@@ -28,15 +28,10 @@ namespace RegistroDeTickets.web.Controllers
                 Email = usuarioVM.Email,
                 PasswordHash = usuarioVM.Contrasenia
             });
-                return RedirectToAction("Listar");
+            return RedirectToAction("Listar");
         }
 
         public IActionResult IniciarSesion()
-        {
-            return View();
-        }
-
-        public IActionResult Listar()
         {
             return View();
         }
