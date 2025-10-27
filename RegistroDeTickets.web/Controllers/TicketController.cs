@@ -7,7 +7,7 @@ namespace RegistroDeTickets.web.Controllers
 {
     public class TicketController(ITicketService ticketService) : Controller
     {
-        private ITicketService _ticketService = ticketService;
+        private readonly ITicketService _ticketService = ticketService;
 
         [HttpGet]
         public IActionResult Registrar()
@@ -27,7 +27,7 @@ namespace RegistroDeTickets.web.Controllers
             _ticketService.AgregarTicket(new Ticket
             {
                 Motivo = ticketVM.Motivo,
-                Tipo = ticketVM.Tipo,
+                PrioridadId = ticketVM.Prioridad,
                 Descripcion = ticketVM.Descripcion
             });
             return RedirectToAction("Listar");

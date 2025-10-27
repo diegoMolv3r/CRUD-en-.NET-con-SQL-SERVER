@@ -87,8 +87,9 @@
                         <tr>
                             <td>@ticket.Id</td>
                             <td>@ticket.Motivo</td>
-                            <td>@ticket.Tipo</td>
+                            <td>@ticket.Prioridad</td>
                             <td>@ticket.Descripcion</td>
+                            <td>@ticket.Estado</td> <!-- Hay que cambiar esto para que se muestre el string -->
                             <td>@ticket.FechaCreacion.ToString()</td>
                             <td class="text-center action-buttons">
                                 <a class="btn btn-primary btn-sm" asp-controller="Ticket" asp-action="Editar" asp-route-id="@ticket"><i class="bi bi-pencil-fill"></i></a>
