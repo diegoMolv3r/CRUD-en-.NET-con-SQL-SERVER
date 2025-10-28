@@ -31,7 +31,7 @@ public partial class RegistroDeTicketsPw3Context : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=DESKTOP-49HAQ3A\\SQLEXPRESS;Database=RegistroDeTicketsPW3;Trusted_Connection=True;TrustServerCertificate=True");
+        => optionsBuilder.UseSqlServer("Server=DESKTOP-FF2AGFF;Database=RegistroDeTicketsPw3;User Id=sa;Password=123456;TrustServerCertificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -127,11 +127,11 @@ public partial class RegistroDeTicketsPw3Context : DbContext
 
             entity.ToTable("Usuario");
 
-            entity.HasIndex(e => e.Id, "UQ__Usuario__3214EC063601E820").IsUnique();
+            entity.HasIndex(e => e.Id, "UQ__Usuario__3214EC06342E076A").IsUnique();
 
-            entity.HasIndex(e => e.Username, "UQ__Usuario__536C85E42CADA95A").IsUnique();
+            entity.HasIndex(e => e.Username, "UQ__Usuario__536C85E44F3F93CB").IsUnique();
 
-            entity.HasIndex(e => e.Email, "UQ__Usuario__A9D1053402040FE3").IsUnique();
+            entity.HasIndex(e => e.Email, "UQ__Usuario__A9D105340F5F23AF").IsUnique();
 
             entity.Property(e => e.Email).HasMaxLength(255);
             entity.Property(e => e.Username).HasMaxLength(20);
