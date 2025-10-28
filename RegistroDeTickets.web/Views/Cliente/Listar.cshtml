@@ -92,8 +92,11 @@
                             <td>@ticket.Estado</td> <!-- Hay que cambiar esto para que se muestre el string -->
                             <td>@ticket.FechaCreacion.ToString()</td>
                             <td class="text-center action-buttons">
-                                <a class="btn btn-primary btn-sm" asp-controller="Ticket" asp-action="Editar" asp-route-id="@ticket"><i class="bi bi-pencil-fill"></i></a>
-                                <a class="btn btn-danger btn-sm" asp-controller="Ticket" asp-action="Eliminar" asp-route-id="@ticket"><i class="bi bi-trash-fill"></i></a>
+                                <a class="btn btn-primary btn-sm" asp-controller="Administrador" asp-action="Editar" asp-route-id="@ticket"><i class="bi bi-pencil-fill"></i></a>
+                                <a class="btn btn-danger btn-sm" asp-controller="Administrador" asp-action="Eliminar" asp-route-id="@ticket"><i class="bi bi-trash-fill"></i></a>
+                                <a class="btn btn-danger btn-sm" asp-controller="Administrador" asp-action="AsignarTecnico" asp-route-id="@ticket"><i class="bi bi-person-fill"></i></a>
+                    
+                       
                             </td>
                         </tr>
                      }
