@@ -15,6 +15,7 @@ namespace RegistroDeTickets.Repository
 
         // DELETE
         void EliminarUsuario(Usuario usuario);
+        Usuario BuscarUsuarioPorEmail(string email);
     }
     public class UsuarioRepository(RegistroDeTicketsPw3Context ctx) : IUsuarioRepository
     {
@@ -40,6 +41,11 @@ namespace RegistroDeTickets.Repository
         {
             _ctx.Usuarios.Remove(usuario);
             _ctx.SaveChanges();
+        }
+
+        public Usuario BuscarUsuarioPorEmail(string email)
+        {
+            return _ctx.Usuarios.FirstOrDefault(u => u.Email == email);
         }
     }
 }
