@@ -7,11 +7,15 @@ public partial class Usuario
 {
     public int Id { get; set; }
 
-    public string? Username { get; set; }
+    public string Username { get; set; } = null!;
 
-    public string? Email { get; set; }
+    public string Email { get; set; } = null!;
 
-    public string? PasswordHash { get; set; }
+    public string PasswordHash { get; set; } = null!;
 
-    public virtual ICollection<Ticket> Tickets { get; set; } = new List<Ticket>();
+    public virtual Administrador? Administrador { get; set; }
+
+    public virtual Cliente? Cliente { get; set; }
+
+    public virtual Tecnico? Tecnico { get; set; }
 }

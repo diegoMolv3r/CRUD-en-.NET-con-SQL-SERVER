@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
@@ -8,10 +8,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RegistroDeTickets.Entidades\RegistroDeTickets.Data.csproj" />
+    <ProjectReference Include="..\RegistroDeTickets.Repository\RegistroDeTickets.Repository.csproj" />
     <ProjectReference Include="..\RegistroDeTickets.Service\RegistroDeTickets.Service.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Views\Administrador\" />
+    <Folder Include="Views\Tecnico\" />
     <Folder Include="wwwroot\img\" />
   </ItemGroup>
 

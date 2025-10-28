@@ -1,6 +1,12 @@
 ﻿@{
+    ViewData["Title"] = "Inicio";
+    ViewData["CSS"] = "Home/inicio.css";
 }
 
-<section class="d-flex flex-column align-items-center justify-content-center">
-    <h1>Acá no hay nada pero sería el home :)</h1>
-</section>
+<div class="hero-section-home">
+    <div class="container text-center">
+        <h1 class="display-4 hero-title">Bienvenido al Centro de Soporte</h1>
+        <p class="lead">Estamos aquí para ayudarte. Registra tu consulta o reclamo y un técnico se pondrá en contacto a la brevedad.</p>
+        <a asp-controller="Cliente" asp-action="Registrar" class="btn btn-custom-primary btn-lg mt-3">Crear nuevo Ticket</a>
+    </div>
+</div>

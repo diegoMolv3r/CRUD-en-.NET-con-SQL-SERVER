@@ -1,39 +1,47 @@
 ﻿using RegistroDeTickets.Data.Entidades;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using RegistroDeTickets.Repository;
 
 namespace RegistroDeTickets.Service
 {   
     public interface IUsuarioService
     {
+        // CREATE
         void AgregarUsuario(Usuario usuario);
+        // READ
         List<Usuario> ObtenerUsuarios();
-
-        void EliminarUsuario(int id);
+        
+        // UPDATE
+        void EditarUsuario(Usuario usuario);
+        
+        // DELETE
+        void EliminarUsuario(Usuario usuario);
     }
     public class UsuarioService : IUsuarioService
     {
-        public static List<Usuario> _usuarios = new List<Usuario>();
+        private readonly IUsuarioRepository _usuarioRepository;
+        
+        public UsuarioService(IUsuarioRepository usuarioRepository)
+        {
+            _usuarioRepository = usuarioRepository;
+        }
 
         public void AgregarUsuario(Usuario usuario)
         {
-            usuario.Id = _usuarios.Count + 1;
-            _usuarios.Add(usuario);
+            _usuarioRepository.AgregarUsuario(usuario);
         }
         public List<Usuario> ObtenerUsuarios()
         {
-            return _usuarios;
+            return _usuarioRepository.ObtenerUsuarios();
         }
-        public void EliminarUsuario(int id)
+
+        public void EditarUsuario(Usuario usuario)
         {
-            var usuario = _usuarios.FirstOrDefault(u => u.Id == id);
-            if (usuario != null)
-            {
-                _usuarios.Remove(usuario);
-            }
+            _usuarioRepository.EditarUsuario(usuario);
+        }
+
+        public void EliminarUsuario(Usuario usuario)
+        {
+            _usuarioRepository.EliminarUsuario(usuario);
         }
     }
 }

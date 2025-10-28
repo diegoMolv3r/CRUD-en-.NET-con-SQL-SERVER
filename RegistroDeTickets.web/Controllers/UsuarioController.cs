@@ -5,14 +5,9 @@ using RegistroDeTickets.web.Models;
 
 namespace RegistroDeTickets.web.Controllers
 {
-    public class UsuarioController : Controller
+    public class UsuarioController(IUsuarioService usuarioService) : Controller
     {
-        public readonly IUsuarioService _usuarioService;
-
-        public UsuarioController(IUsuarioService usuarioService)
-        {
-            _usuarioService = usuarioService;
-        }
+        public readonly IUsuarioService _usuarioService = usuarioService;
 
         [HttpGet]
         public IActionResult Registrar()
@@ -33,15 +28,10 @@ namespace RegistroDeTickets.web.Controllers
                 Email = usuarioVM.Email,
                 PasswordHash = usuarioVM.Contrasenia
             });
-                return RedirectToAction("Listar");
+            return RedirectToAction("Listar");
         }
 
         public IActionResult IniciarSesion()
-        {
-            return View();
-        }
-
-        public IActionResult Listar()
         {
             return View();
         }

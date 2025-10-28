@@ -1,0 +1,54 @@
+﻿@{
+    ViewData["Title"] = "Registrar Ticket";
+    ViewData["CSS"] = "Cliente/registrarTicket.css";
+}
+
+@model RegistroDeTickets.web.Models.TicketViewModel
+
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="ticket-form-container">
+            <h2>Registrar Ticket</h2>
+            <form method="post">
+                @Html.AntiForgeryToken()
+
+                <div class="mb-3">
+                    <label for="motivo" class="form-label">Motivo</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-pencil-square"></i></span>
+                        <input id="motivo" name="motivo" class="form-control" placeholder="Ej: Falla de conexión" />
+                    </div>
+                    <span asp-validation-for="Motivo" class="text-danger"></span>
+                </div>
+
+                <!-- Ojo aca con los names y el nombre del atribut en la tabla -->
+                <div class="mb-3">
+                    <label for="Prioridad" class="form-label">Tipo</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-list-task"></i></span>
+                        <select id="prioridad" name="Prioridad" class="form-select" required>
+                            <option value="" selected disabled>Seleccione una prioridad</option>
+                            <option value="1">Baja</option>
+                            <option value="2">Media</option>
+                            <option value="3">Alta</option>
+                        </select>
+                    </div>
+                    <span asp-validation-for="Prioridad" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label for="descripcion" class="form-label">Descripción</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-body-text"></i></span>
+                        <textarea id="descripcion" name="descripcion" class="form-control" placeholder="Detalle aquí el problema..."></textarea>
+                    </div>
+                    <span asp-validation-for="Descripcion" class="text-danger"></span>
+                </div>
+
+                <div class="d-grid mt-4">
+                    <button type="submit" class="btn btn-custom-primary">Registrar Ticket</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
