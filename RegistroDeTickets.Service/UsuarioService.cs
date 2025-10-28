@@ -12,9 +12,9 @@ namespace RegistroDeTickets.Service
 
         void EliminarUsuario(Usuario usuario);
 
-        Usuario BuscarUsuario(Usuario usuario);
-
         Usuario ObtenerUsuarioPorId (int id);
+
+        Usuario BuscarUsuarioPorEmail(string email);
 
         void DesignarUsuarioComoTecnico(Usuario usuario);
 
@@ -75,5 +75,6 @@ namespace RegistroDeTickets.Service
                 _usuarioRepository.EditarUsuario(usuario);
             }
         }
+
     }
 }
