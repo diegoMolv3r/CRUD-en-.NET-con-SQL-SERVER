@@ -9,14 +9,16 @@ namespace RegistroDeTickets.Service
         void AgregarUsuario(Usuario usuario);
         // READ
         List<Usuario> ObtenerUsuarios();
-        
-        // UPDATE
-        void EditarUsuario(Usuario usuario);
-        
-        // DELETE
+
         void EliminarUsuario(Usuario usuario);
 
-        Usuario BuscarUsuarioPorEmail(String email);
+        Usuario BuscarUsuario(Usuario usuario);
+
+        Usuario ObtenerUsuarioPorId (int id);
+
+        void DesignarUsuarioComoTecnico(Usuario usuario);
+
+        void DesignarUsuarioComoCliente(Usuario usuario);
     }
     public class UsuarioService : IUsuarioService
     {
@@ -32,7 +34,7 @@ namespace RegistroDeTickets.Service
             _usuarioRepository.AgregarUsuario(usuario);
         }
         public List<Usuario> ObtenerUsuarios()
-        {
+        {   
             return _usuarioRepository.ObtenerUsuarios();
         }
 
@@ -49,6 +51,29 @@ namespace RegistroDeTickets.Service
         public Usuario BuscarUsuarioPorEmail(string email)
         {
             return _usuarioRepository.BuscarUsuarioPorEmail(email);
+        }
+
+        public Usuario ObtenerUsuarioPorId(int id)
+        {
+            return _usuarioRepository.ObtenerUsuarioPorId(id);
+        }
+
+        public void DesignarUsuarioComoTecnico(Usuario usuario) { 
+            if (usuario.Tecnico == null) {
+                usuario.Tecnico = new Tecnico { IdNavigation = usuario };
+                _usuarioRepository.AgregarTecnico(usuario.Tecnico);
+                _usuarioRepository.EditarUsuario(usuario);
+            }
+        }
+
+        public void DesignarUsuarioComoCliente(Usuario usuario)
+        {
+            if (usuario.Cliente == null)
+            {
+                usuario.Cliente = new Cliente { IdNavigation = usuario };
+                _usuarioRepository.AgregarCliente(usuario.Cliente);
+                _usuarioRepository.EditarUsuario(usuario);
+            }
         }
     }
 }

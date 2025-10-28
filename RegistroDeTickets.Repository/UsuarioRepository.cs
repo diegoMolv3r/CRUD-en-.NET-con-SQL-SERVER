@@ -1,4 +1,5 @@
-﻿using RegistroDeTickets.Data.Entidades;
+﻿using Microsoft.EntityFrameworkCore;
+using RegistroDeTickets.Data.Entidades;
 
 namespace RegistroDeTickets.Repository
 {
@@ -15,6 +16,13 @@ namespace RegistroDeTickets.Repository
 
         // DELETE
         void EliminarUsuario(Usuario usuario);
+
+        Usuario ObtenerUsuarioPorId(int id);
+
+        void AgregarTecnico(Tecnico tecnico);
+
+        void AgregarCliente(Cliente cliente);
+
         Usuario BuscarUsuarioPorEmail(string email);
     }
     public class UsuarioRepository(RegistroDeTicketsPw3Context ctx) : IUsuarioRepository
@@ -29,12 +37,28 @@ namespace RegistroDeTickets.Repository
 
         public List<Usuario> ObtenerUsuarios()
         {
-            return _ctx.Usuarios.ToList();
+            return _ctx.Usuarios
+        .Include(u => u.Administrador)
+        .Include(u => u.Tecnico)       
+        .Include(u => u.Cliente)       
+        .ToList();
         }
 
         public void EditarUsuario(Usuario usuario)
         {
-            throw new NotImplementedException();
+            _ctx.Usuarios.Update(usuario);
+        }
+
+        public void AgregarTecnico (Tecnico tecnico)
+        {
+            _ctx.Tecnicos.Add(tecnico);
+            _ctx.SaveChanges();
+        }
+
+        public void AgregarCliente(Cliente cliente)
+        {
+            _ctx.Clientes.Add(cliente);
+            _ctx.SaveChanges();
         }
 
         public void EliminarUsuario(Usuario usuario)
@@ -46,6 +70,11 @@ namespace RegistroDeTickets.Repository
         public Usuario BuscarUsuarioPorEmail(string email)
         {
             return _ctx.Usuarios.FirstOrDefault(u => u.Email == email);
+        }
+
+        public Usuario ObtenerUsuarioPorId(int id)
+        {
+            return _ctx.Usuarios.FirstOrDefault(u => u.Id == id);
         }
     }
 }

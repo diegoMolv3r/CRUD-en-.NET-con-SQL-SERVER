@@ -9,6 +9,7 @@ var connectionString = builder.Configuration.GetConnectionString("EFCoreContext"
 builder.Services.AddDbContext<RegistroDeTicketsPw3Context>(options =>
     options.UseSqlServer(connectionString));
 
+
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<ITicketService, TicketService>();
 

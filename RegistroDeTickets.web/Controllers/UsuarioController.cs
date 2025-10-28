@@ -34,7 +34,7 @@ namespace RegistroDeTickets.web.Controllers
                 Email = usuarioVM.Email,
                 PasswordHash = usuarioVM.Contrasenia
             });
-            return RedirectToAction("Listar");
+                return RedirectToAction("IniciarSesion");
         }
 
         [HttpGet]
