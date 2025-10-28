@@ -5,7 +5,7 @@ using RegistroDeTickets.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+var connectionString = builder.Configuration.GetConnectionString("EFCoreContext");
 builder.Services.AddDbContext<RegistroDeTicketsPw3Context>(options =>
     options.UseSqlServer(connectionString));
 
@@ -44,7 +44,7 @@ app.MapStaticAssets();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Login}/{action=IniciarSesion}/{id?}")
+    pattern: "{controller=Usuario}/{action=IniciarSesion}/{id?}")
     .WithStaticAssets();
 
 app.MapControllers();
