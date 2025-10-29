@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RegistroDeTickets.Data.Entidades;
 using RegistroDeTickets.Service;
+using RegistroDeTickets.web.Models;
 
 namespace RegistroDeTickets.web.Controllers
 {
@@ -12,7 +13,7 @@ namespace RegistroDeTickets.web.Controllers
         {
             return View();
         }
-
+        [HttpGet]
         public IActionResult Listar()
         {
             return View(_ticketService.ObtenerTickets());
@@ -23,7 +24,7 @@ namespace RegistroDeTickets.web.Controllers
             _ticketService.EliminarTicket(ticket);
             return RedirectToAction("Listar");
         }
-
+        [HttpGet]
         public IActionResult ListarUsuarios() {
             return View(_usuarioService.ObtenerUsuarios());
         }
@@ -45,6 +46,32 @@ namespace RegistroDeTickets.web.Controllers
         {
             _usuarioService.DesignarUsuarioComoCliente(_usuarioService.ObtenerUsuarioPorId(id));
             return RedirectToAction("ListarUsuarios");
+        }
+
+        [HttpGet]
+        public IActionResult RegistrarUsuarioTecnico() {
+            return View("RegistrarUsuarioTecnico");
+        }
+
+        [HttpPost]
+        public IActionResult RegistrarUsuarioTecnico(UsuarioViewModel usuarioVM)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(usuarioVM);
+            }
+
+            Usuario nuevoTecnico = new Usuario
+            {
+                Username = usuarioVM.Username,
+                Email = usuarioVM.Email,
+                PasswordHash = usuarioVM.Contrasenia
+            };
+
+            _usuarioService.AgregarUsuario(nuevoTecnico);
+            _usuarioService.DesignarUsuarioComoTecnico(nuevoTecnico);
+
+            return RedirectToAction("IniciarSesion", "Usuario");
         }
 
 
