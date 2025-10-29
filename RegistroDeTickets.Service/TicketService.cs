@@ -9,6 +9,8 @@ namespace RegistroDeTickets.Service
         List<Ticket> ObtenerTickets();
         void EditarTicket(Ticket ticket);
         void EliminarTicket(Ticket ticket);
+        Ticket BuscarTicketPorId(int id);
+        void AsignarTecnicoATicket(int idTicket, int idTecnico);
     }
 
     public class TicketService(ITicketRepository ticketRepository) : ITicketService
@@ -36,5 +38,16 @@ namespace RegistroDeTickets.Service
             _ticketRepository.EliminarTicket(ticket);
         }
 
+        public Ticket BuscarTicketPorId(int id)
+        {
+            return _ticketRepository.BuscarTicketPorId(id);
+        }
+
+        public void AsignarTecnicoATicket(int idTicket, int idTecnico)
+        {
+            Ticket ticket = _ticketRepository.BuscarTicketPorId(idTicket);
+            ticket.IdTecnico = idTecnico;
+            EditarTicket(ticket);
+        }
     }
 }

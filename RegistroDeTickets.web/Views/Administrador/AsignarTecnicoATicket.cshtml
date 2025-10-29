@@ -1,9 +1,8 @@
-﻿@{
-    ViewData["Title"] = "Listar Tickets";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
 }
-@model List<RegistroDeTickets.Data.Entidades.Ticket>
-
 <style>
     body {
         background-color: #f0f2f5;
@@ -87,25 +86,31 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var ticket in Model)
-                    {
+
                         <tr>
-                            <td>@ticket.Id</td>
-                            <td>@ticket.Motivo</td>
-                            <td>@ticket.PrioridadId</td>
-                            <td>@ticket.FechaCreacion</td>
-                            <td>@ticket.IdCliente</td>
-                            <td>@(ticket.IdTecnico != null ? "Id de tecnico: " + ticket.IdTecnico : "No")</td>
-                            <td class="text-center action-buttons">
-                                <a class="btn btn-primary btn-sm" asp-controller="Administrador" asp-action="AsignarTecnicoATicket" asp-route-Id="@ticket.Id" title="Asignar tecnico a ticket"><i class="bi bi-pencil-fill"></i></a>
-                            </td>
+                        <td>@ViewBag.Ticket.Id</td>
+                        <td>@ViewBag.Ticket.Motivo</td>
+                        <td>@ViewBag.Ticket.PrioridadId</td>
+                        <td>@ViewBag.Ticket.FechaCreacion</td>
+                        <td>@ViewBag.Ticket.IdCliente</td>
+                        <td>@(ViewBag.Ticket.IdTecnico != null ? "Sí" : "No")</td>
+                        <td>
+                            <form asp-action="AsignarTecnicoATicket" method="post">
+                                <input type="hidden" name="idTicket" value="@ViewBag.Ticket.Id" />
+                                <select id="tecnicoSelect" name="idTecnico">
+                                    @foreach (var tecnico in ViewBag.Tecnicos)
+                                    {
+                                    <option value="@tecnico.Id">@tecnico.Username </option>
+                                    }
+                                </select>
+                                <button type="submit" class="btn btn-primary btn-block mb-3">Seleccionar Tecnico</button>
+                            </form>
+                        </td>
                         </tr>
-                    }
+
+                    
                 </tbody>
             </table>
         </div>
     </div>
 </div>
-
-
-

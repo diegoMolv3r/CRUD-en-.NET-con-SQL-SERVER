@@ -29,7 +29,8 @@ namespace RegistroDeTickets.Repository
         public void EditarTicket(Ticket ticket)
         {
             // Editar ticket seria solo para modificar el estado y el tecnico asignado
-            throw new NotImplementedException();
+            ctx.Tickets.Update(ticket);
+            ctx.SaveChanges();
         }
 
         public void EliminarTicket(Ticket ticket)
