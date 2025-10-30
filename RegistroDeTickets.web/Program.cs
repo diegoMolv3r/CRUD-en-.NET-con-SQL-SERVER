@@ -17,6 +17,8 @@ builder.Services.AddScoped<ITicketRepository, TicketRepository>();
 
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddTransient<IEmailService, EmailService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
