@@ -2,16 +2,20 @@
 using RegistroDeTickets.Service;
 using RegistroDeTickets.Data.Entidades;
 using RegistroDeTickets.web.Models;
+using Microsoft.Extensions.Logging;
+using Microsoft.ApplicationInsights;
 
 namespace RegistroDeTickets.web.Controllers
 {
     public class UsuarioController : Controller
     {
         private readonly IUsuarioService _usuarioService;
+        private readonly ILogger<UsuarioController> _logger;
 
-        public UsuarioController(IUsuarioService usuarioService)
+        public UsuarioController(IUsuarioService usuarioService, ILogger<UsuarioController> logger)
         {
             _usuarioService = usuarioService;
+            _logger = logger;
         }
 
 
@@ -58,8 +62,7 @@ namespace RegistroDeTickets.web.Controllers
                 TempData["Mensaje"] = "Usuario Inexistente";
                 return View(usuario);
             }
-
-
+            _logger.LogInformation("Inicio de sesion exitoso");
             return RedirectToAction("Inicio","Home");
         }
         public IActionResult Listar()
