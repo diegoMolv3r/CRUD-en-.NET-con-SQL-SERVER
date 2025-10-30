@@ -13,6 +13,10 @@ public partial class Usuario
 
     public string PasswordHash { get; set; } = null!;
 
+    public string? TokenHashRecuperacion { get; set; }
+
+    public DateTime? TokenHashRecuperacionExpiracion { get; set; }
+
     public virtual Administrador? Administrador { get; set; }
 
     public virtual Cliente? Cliente { get; set; }

@@ -24,8 +24,11 @@ CREATE TABLE Usuario(
 	Username NVARCHAR(20) NOT NULL UNIQUE,
 	Email NVARCHAR(255) NOT NULL UNIQUE,
 	PasswordHash NVARCHAR(MAX) NOT NULL,
+	TokenHashRecuperacion NVARCHAR(MAX) NULL,
+	TokenHashRecuperacionExpiracion DATETIME2 NULL,
 	CONSTRAINT PK_usuario PRIMARY KEY (Id)
 );
+GO
 
 CREATE TABLE Administrador (
     Id INT NOT NULL,
