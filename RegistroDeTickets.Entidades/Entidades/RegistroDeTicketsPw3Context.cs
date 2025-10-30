@@ -29,13 +29,9 @@ public partial class RegistroDeTicketsPw3Context : DbContext
 
     public virtual DbSet<Usuario> Usuarios { get; set; }
 
-    //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-    //      => optionsBuilder.UseSqlServer("Server=DESKTOP-7IS0SRC\\SQLEXPRESS;Database=RegistroDeTicketsPW3;\nTrusted_Connection=True;\nTrustServerCertificate=True\n");
-    
-    // Modifico el script para nico-dev 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Server=localhost\\SQLEXPRESS;Database=RegistroDeTicketsPW3;User Id=nicoDbo;Password=154896manInCode#;TrustServerCertificate=True");
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlServer("Server=DESKTOP-FF2AGFF;Database=RegistroDeTicketsPw3;User Id=sa;Password=123456;TrustServerCertificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -131,11 +127,11 @@ public partial class RegistroDeTicketsPw3Context : DbContext
 
             entity.ToTable("Usuario");
 
-            entity.HasIndex(e => e.Id, "UQ__Usuario__3214EC0608723551").IsUnique();
+            entity.HasIndex(e => e.Id, "UQ__Usuario__3214EC06342E076A").IsUnique();
 
-            entity.HasIndex(e => e.Username, "UQ__Usuario__536C85E4F6FCD591").IsUnique();
+            entity.HasIndex(e => e.Username, "UQ__Usuario__536C85E44F3F93CB").IsUnique();
 
-            entity.HasIndex(e => e.Email, "UQ__Usuario__A9D105342A3C6061").IsUnique();
+            entity.HasIndex(e => e.Email, "UQ__Usuario__A9D105340F5F23AF").IsUnique();
 
             entity.Property(e => e.Email).HasMaxLength(255);
             entity.Property(e => e.Username).HasMaxLength(20);
