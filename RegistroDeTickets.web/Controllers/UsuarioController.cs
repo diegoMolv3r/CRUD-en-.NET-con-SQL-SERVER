@@ -5,9 +5,15 @@ using RegistroDeTickets.web.Models;
 
 namespace RegistroDeTickets.web.Controllers
 {
-    public class UsuarioController(IUsuarioService usuarioService) : Controller
+    public class UsuarioController : Controller
     {
-        public readonly IUsuarioService _usuarioService = usuarioService;
+        private readonly IUsuarioService _usuarioService;
+
+        public UsuarioController(IUsuarioService usuarioService)
+        {
+            _usuarioService = usuarioService;
+        }
+
 
         [HttpGet]
         public IActionResult Registrar()
@@ -28,12 +34,37 @@ namespace RegistroDeTickets.web.Controllers
                 Email = usuarioVM.Email,
                 PasswordHash = usuarioVM.Contrasenia
             });
-            return RedirectToAction("Listar");
+                return RedirectToAction("IniciarSesion");
         }
 
+        [HttpGet]
         public IActionResult IniciarSesion()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult IniciarSesion(LoginViewModel usuario)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(usuario);
+            }
+
+            var usuarioEncontrado = _usuarioService.BuscarUsuarioPorEmail(usuario.Email);
+
+            if (usuarioEncontrado == null)
+            { 
+                TempData["Mensaje"] = "Usuario Inexistente";
+                return View(usuario);
+            }
+
+
+            return RedirectToAction("Inicio","Home");
+        }
+        public IActionResult Listar()
+        {
+            return RedirectToAction("Registrar");
         }
     }
 }
