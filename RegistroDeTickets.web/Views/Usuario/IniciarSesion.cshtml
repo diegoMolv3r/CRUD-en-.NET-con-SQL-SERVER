@@ -38,7 +38,25 @@
             <p class="text-info">¿No tenés cuenta? <a href="#">Registrarse</a></p>
         </div>
     </form>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+    <div id="g_id_onload"
+         data-client_id="@ViewBag.GoogleClientId"
+         data-context="signin"
+         data-ux_mode="popup"
+         data-login_uri="https://localhost:7243/Usuario/GoogleSignIn"
+         data-auto_select="true">
+    </div>
+
+    <div class="g_id_signin"
+         data-type="standard"
+         data-shape="rectangular"
+         data-theme="outline"
+         data-text="signin_with"
+         data-size="large">
+    </div>
 </div>
+
 
 <script>
     const setupPasswordToggle = (toggleButtonId, passwordInputId) => {

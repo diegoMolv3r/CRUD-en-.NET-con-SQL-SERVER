@@ -15,6 +15,7 @@ namespace RegistroDeTickets.Service
         
         // DELETE
         void EliminarUsuario(Usuario usuario);
+        Usuario BuscarPorEmail(string email);
     }
     public class UsuarioService : IUsuarioService
     {
@@ -42,6 +43,11 @@ namespace RegistroDeTickets.Service
         public void EliminarUsuario(Usuario usuario)
         {
             _usuarioRepository.EliminarUsuario(usuario);
+        }
+
+        Usuario IUsuarioService.BuscarPorEmail(string email)
+        {
+            return _usuarioRepository.BuscarPorEmail(email);
         }
     }
 }

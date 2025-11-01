@@ -1,4 +1,5 @@
-﻿using RegistroDeTickets.Data.Entidades;
+﻿using Microsoft.EntityFrameworkCore;
+using RegistroDeTickets.Data.Entidades;
 
 namespace RegistroDeTickets.Repository
 {
@@ -15,6 +16,7 @@ namespace RegistroDeTickets.Repository
 
         // DELETE
         void EliminarUsuario(Usuario usuario);
+        Usuario BuscarPorEmail(string email);
     }
     public class UsuarioRepository(RegistroDeTicketsPw3Context ctx) : IUsuarioRepository
     {
@@ -40,6 +42,13 @@ namespace RegistroDeTickets.Repository
         {
             _ctx.Usuarios.Remove(usuario);
             _ctx.SaveChanges();
+        }
+
+        Usuario IUsuarioRepository.BuscarPorEmail(string email)
+        {
+            return _ctx.Usuarios
+            .FirstOrDefault(u => u.Email == email);
+
         }
     }
 }

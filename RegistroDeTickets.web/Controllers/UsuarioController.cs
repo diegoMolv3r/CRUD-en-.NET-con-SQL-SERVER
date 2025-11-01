@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using RegistroDeTickets.Service;
+﻿using Google.Apis.Auth;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.SqlServer.Server;
 using RegistroDeTickets.Data.Entidades;
+using RegistroDeTickets.Service;
 using RegistroDeTickets.web.Models;
 
 namespace RegistroDeTickets.web.Controllers
@@ -33,7 +36,62 @@ namespace RegistroDeTickets.web.Controllers
 
         public IActionResult IniciarSesion()
         {
+            ViewBag.GoogleClientId = Environment.GetEnvironmentVariable("GOOGLE_CLIENT_ID");
             return View();
         }
+
+        [HttpGet]
+        public IActionResult GoogleSignIn()
+        {
+            ViewBag.GoogleClientId = Environment.GetEnvironmentVariable("GOOGLE_CLIENT_ID");
+            return View("IniciarSesion");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> GoogleSignIn([FromBody] GoogleTokenDto data)
+        {
+            if (string.IsNullOrEmpty(data?.Credential))
+                return BadRequest(new { success = false, message = "Token inválido o vacío." });
+
+            try
+            {
+                var payload = await GoogleJsonWebSignature.ValidateAsync(
+                    data.Credential,
+                    new GoogleJsonWebSignature.ValidationSettings
+                    {
+                        Audience = new[]
+                        {
+                    Environment.GetEnvironmentVariable("GOOGLE_CLIENT_ID")
+                        }
+                    });
+
+                var usuario = _usuarioService.BuscarPorEmail(payload.Email);
+
+                if (usuario == null)
+                {
+                    usuario = new Usuario
+                    {
+                        Username = payload.Name ?? payload.Email,
+                        Email = payload.Email,
+                        PasswordHash = null // No se usa, porque Google gestiona la autenticación
+                    };
+                    _usuarioService.AgregarUsuario(usuario);
+                };
+                return Ok(new
+                {
+                    success = true,
+                    redirectUrl = Url.Action("Index", "Home")
+                });
+            }
+            catch (InvalidJwtException)
+            {
+                return BadRequest(new { success = false, message = "Token de Google inválido." });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { success = false, message = "Error interno del servidor", error = ex.Message });
+            }
+        }
+
     }
 }
