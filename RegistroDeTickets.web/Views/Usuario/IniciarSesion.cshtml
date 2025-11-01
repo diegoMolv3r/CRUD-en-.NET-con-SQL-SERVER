@@ -57,6 +57,27 @@
     </div>
 </div>
 
+<script>
+    async function onGoogleSignIn(response) {
+        const credential = response.credential;
+
+        const result = await fetch("/Usuario/GoogleSignIn", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ credential })
+        });
+
+        const data = await result.json();
+
+        if (data.success) {
+            window.location.href = data.redirectUrl;
+        } else {
+            alert("Error al iniciar sesión con Google: " + data.message);
+        }
+    }
+</script>
 
 <script>
     const setupPasswordToggle = (toggleButtonId, passwordInputId) => {
