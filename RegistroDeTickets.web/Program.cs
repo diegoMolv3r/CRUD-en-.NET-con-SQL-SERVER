@@ -5,6 +5,11 @@ using RegistroDeTickets.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
+if (builder.Environment.IsDevelopment())
+{
+    builder.Configuration.AddUserSecrets<Program>();
+}
+
 var connectionString = builder.Configuration.GetConnectionString("EFCoreContext");
 builder.Services.AddDbContext<RegistroDeTicketsPw3Context>(options =>
     options.UseSqlServer(connectionString));
@@ -19,6 +24,11 @@ builder.Services.AddScoped<ITicketRepository, TicketRepository>();
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddTransient<IEmailService, EmailService>();
+
+builder.Services.AddScoped<
+    Microsoft.AspNetCore.Identity.IPasswordHasher<RegistroDeTickets.Data.Entidades.Usuario>,
+    Microsoft.AspNetCore.Identity.PasswordHasher<RegistroDeTickets.Data.Entidades.Usuario>
+>();
 
 var app = builder.Build();
 

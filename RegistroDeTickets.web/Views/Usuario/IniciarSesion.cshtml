@@ -47,15 +47,6 @@
             <span asp-validation-for="PasswordHash" class="text-danger"></span>
         </div>
 
-        <div class="text-center mb-3">
-            <a @* asp-controller="Usuario" *@ 
-        @* asp-action="RecuperarContraseña" *@
-               href="#"
-               class="text-secondary small">
-                ¿Olvidaste tu contraseña?
-            </a>
-        </div>
-
         <div class="d-grid">
             <button type="submit" class="btn btn-primary btn-block mb-3">Ingresar</button>
         </div>
@@ -63,9 +54,17 @@
         <div class="d-grid">
             <a class="btn btn-outline-primary" asp-area="" asp-controller="Usuario" asp-action="Registrar">Registrarme</a>
         </div>
-
+        @*
         <div class="text-center mt-3">
             <a class="text-info" asp-area="" asp-controller="Login" asp-action="RecuperarContrasenia">¿Olvidaste tu contraseña?</a>
+        </div>*@
+         
+        <div class="text-center mb-3">
+            <a asp-controller="Usuario"
+               asp-action="SolicitarRecuperacion"
+               class="text-info">
+                ¿Olvidaste tu contraseña?
+            </a>
         </div>
 
     </form>
