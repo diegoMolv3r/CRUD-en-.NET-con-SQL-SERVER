@@ -44,7 +44,7 @@ namespace RegistroDeTickets.web.Controllers
         public IActionResult GoogleSignIn()
         {
             ViewBag.GoogleClientId = Environment.GetEnvironmentVariable("GOOGLE_CLIENT_ID");
-            return View("IniciarSesion");
+            return RedirectToAction("IniciarSesion");
         }
 
         [HttpPost]
@@ -65,18 +65,8 @@ namespace RegistroDeTickets.web.Controllers
                         }
                     });
 
-                var usuario = _usuarioService.BuscarPorEmail(payload.Email);
+                _usuarioService.RegistrarUsuarioGoogle(payload.Email, payload.Name);
 
-                if (usuario == null)
-                {
-                    usuario = new Usuario
-                    {
-                        Username = payload.Name ?? payload.Email,
-                        Email = payload.Email,
-                        PasswordHash = null // No se usa, porque Google gestiona la autenticación
-                    };
-                    _usuarioService.AgregarUsuario(usuario);
-                };
                 return Ok(new
                 {
                     success = true,
@@ -92,6 +82,5 @@ namespace RegistroDeTickets.web.Controllers
                 return StatusCode(500, new { success = false, message = "Error interno del servidor", error = ex.Message });
             }
         }
-
     }
 }

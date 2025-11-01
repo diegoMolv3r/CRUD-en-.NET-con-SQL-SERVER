@@ -15,6 +15,7 @@ var connectionString = Environment.GetEnvironmentVariable("BASE_DE_DATOS");
 builder.Services.AddDbContext<RegistroDeTicketsPw3Context>(options =>
     options.UseSqlServer(connectionString));
 
+
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<ITicketService, TicketService>();
 
